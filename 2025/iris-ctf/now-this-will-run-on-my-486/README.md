@@ -146,10 +146,10 @@ This routine interprets certain bytes as instructions for a JIT compiler. Essent
 I used [edb debugger](https://github.com/eteran/edb-debugger) because it’s straightforward to handle breakpoints and memory dumps. Here’s the process:
 
 1. **Run the Binary** – Initially, the JIT routine triggers `SIGILL`, stopping at the newly `mmap`ed region with lots of `db` instructions:
-   ![Before compiling the bytecode: lots of db instructions](now-this-will-run-on-my-486/before-compile.png)
+   ![Before compiling the bytecode: lots of db instructions](before-compile.png)
 2. **Pass the Signal** – Press "Run (Pass Signal to Application)" repeatedly to allow the JIT handler to replace some bytecode with valid opcodes.
 3. **Re-examine Memory** – Watch the code region in the debugger morph from raw `db` placeholders into real x86_64:
-    ![After compiling the bytecode: real x86_64 instructions](now-this-will-run-on-my-486/after-compile.png)
+    ![After compiling the bytecode: real x86_64 instructions](after-compile.png)
 4. **Repeat** – The program still returns "incorrect" eventually, but by resetting RIP after each return and continuing execution, you can fully generate all machine code.
 5. **Dump the Final Code** – Once you see the code is fully patched, save that memory region to a file.
 

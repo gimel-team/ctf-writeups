@@ -2,4 +2,4 @@
 
 ## Reverse Engineering
 
-* [Now this will run on my 486?](now-this-will-run-on-my-486.md)
+* [Now this will run on my 486?](now-this-will-run-on-my-486/README.md)
