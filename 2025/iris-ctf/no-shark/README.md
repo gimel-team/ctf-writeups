@@ -6,7 +6,7 @@
 
 > Where's baby shark at?
 
-We're given an archive containing a text file name `noshark.txt`.
+We're given an archive containing a text file named `noshark.txt`.
 
 ## Solution
 
@@ -20,7 +20,9 @@ Data:
 ... more lines below
 ```
 
-CyberChef's Magic mode suggests that it's a `File type: application/tcp (tcp)`, meaning it's weirdly encoded network communication. I googled for a random hex packet decoder and found [HPD](https://hpd.gasmi.net/) which proved that idea to be true.
+CyberChef's Magic mode suggests that it's a `File type: application/tcp (tcp)`, meaning it's an unusually encoded network communication. I googled for a random hex packet decoder and found [HPD](https://hpd.gasmi.net/) which proved that idea to be true.
+
+![Hex Packet Decoder](hpd.png)
 
 A bit more googling and asking the oracle later, I found out that the `text2pcap` binary distributed with Wireshark allows for converting the hex data to pcap file. However, it requires the data to be formatted in a specific way, so here's the script to do it for us.
 
@@ -65,7 +67,7 @@ The `packets.txt` file now contains those hex-encoded network packets in a forma
 ... more lines below
 ```
 
-We can now convert it to pcap file: `text2pcap packets.txt output.pcap`. Once I opened it in Wireshark, I saw it contains a single raw TCP stream. To play with that data, I extracted the first (and only) stream data  with `tshark` in raw format: `tshark -r output.pcap -q -z follow,tcp,raw,0 > stream_data_raw.txt`. The created file looked like this:
+We can now convert it to a pcap file: `text2pcap packets.txt output.pcap`. Once I opened it in Wireshark, I saw it contained a single raw TCP stream. To play with that data, I extracted the stream data  with `tshark` in a raw format: `tshark -r output.pcap -q -z follow,tcp,raw,0 > stream_data_raw.txt`. The created file looked like this:
 
 ```
 ===================================================================
@@ -77,7 +79,7 @@ Node 1: 127.0.0.1:6767
 ... more hex lines below
 ```
 
-As it still wasn't exactly what I wanted, I converted that data back to binary format: `xxd -r -p stream_data_raw.txt > stream_data.bin`. With a binary file ready, I used `binwalk` to scan the file for any interesting data: `binwalk stream_data.bin` and it found a JPEG file:
+As it still wasn't exactly what I wanted, I converted that data back to binary format: `xxd -r -p stream_data_raw.txt > stream_data.bin`. With a binary file ready, I used `binwalk` to scan the file for any interesting data: `binwalk stream_data.bin` and it found a JPEG file.
 
 ```
 ----------------------------------------------------------------------------------------------------------
