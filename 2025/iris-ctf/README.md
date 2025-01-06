@@ -3,6 +3,7 @@
 ## Reverse Engineering
 
 * [Now this will run on my 486?](now-this-will-run-on-my-486/README.md)
+* [Crispy Kelp](crispy-kelp/README.md)
 
 ## Networks
 
