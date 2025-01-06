@@ -1,6 +1,6 @@
 # Now This Will Run on My 486?
 
-**Challenge**: *From [IrisCTF 2025](https://ctftime.org/event/2503) in the “easy” category.*
+**Challenge**: *From [IrisCTF 2025](https://ctftime.org/event/2503) in the “Reverse Engineering” category, tagged as "easy".*
 
 ## Challenge Description
 
