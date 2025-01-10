@@ -8,3 +8,7 @@
 ## Networks
 
 * [No Shark?](no-shark/README.md)
+
+## Web
+
+* [webwebhookhook](https://zimzi.substack.com/p/irisctf-2025-webwebhookhook)
